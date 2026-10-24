@@ -1,0 +1,7 @@
+{
+  "id":"pluginbatchmanager",
+  "name":"PluginBatchManager",
+  "version":"0.1.0",
+  "main":"io.mintymc.pbm.velocity.VelocityPlugin",
+  "description":"Batch plugin update manager for Velocity; preserves original JAR filenames"
+}

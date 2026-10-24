@@ -1,0 +1,45 @@
+name: Build PluginBatchManager
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Java 25
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.2.1'
+      - name: Build both plugin JARs
+        run: gradle :paper:jar :velocity:jar --no-daemon --stacktrace
+      - name: Run file-operation smoke tests
+        run: |
+          mkdir -p build/smoke-classes
+          javac -d build/smoke-classes common/src/main/java/io/mintymc/pbm/core/*.java tests/SmokeTest.java
+          java -cp build/smoke-classes SmokeTest
+      - name: Upload Paper/Purpur JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: PluginBatchManager-Paper
+          path: paper/build/libs/PluginBatchManager-Paper-*.jar
+          if-no-files-found: error
+      - name: Upload Velocity JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: PluginBatchManager-Velocity
+          path: velocity/build/libs/PluginBatchManager-Velocity-*.jar
+          if-no-files-found: error

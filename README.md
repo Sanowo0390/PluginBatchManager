@@ -1,15 +1,18 @@
 # PluginBatchManager
 
-Paper/Purpur と Velocity に対応するプラグイン一括更新ツール（試作版）。
+Paper/Purpur and Velocity plugin batch updater. Preserves downloaded JAR filenames; moves old JARs to `plugins/.disabled/<batch>/` rather than deleting them.
 
-- 配布元の JAR ファイル名を維持
-- 旧 JAR は `plugins/.disabled/<batch>/` に移動
-- `/pbm`（Paper/Purpur）、`/pbmv`（Velocity）で更新を実行
+## Download built JARs with GitHub Actions
 
-## GitHub Actions からダウンロード
+1. Open **Actions** → **Build PluginBatchManager**.
+2. Open a successful run or select **Run workflow**.
+3. Under **Artifacts**, download **PluginBatchManager-Paper** or **PluginBatchManager-Velocity**.
+4. Unzip and place the JAR into the respective `plugins/` folder. Restart the server/proxy.
 
-[Actions](https://github.com/Sanowo0390/PluginBatchManager/actions) → **Build PluginBatchManager** → 成功した実行 → **Artifacts** から **PluginBatchManager-Paper** または **PluginBatchManager-Velocity** を選択。ZIP を解凍して JAR を入手できます。
+## Build locally
 
-> **注意:** 現段階は試作版です。公式 API でのビルド、実サーバー起動、配布元からのダウンロードが確認できるまで本番には導入しないでください。
+Requires Java 25 and Gradle 9.2.1+. Run `gradle :paper:jar :velocity:jar`.
 
-詳細: [README_ja.md](README_ja.md)
+See [日本語の説明](README_ja.md) for configuration, commands and limitations.
+
+**Status:** Experimental; live server operation and real source downloads have not yet been verified. Use a test server first.

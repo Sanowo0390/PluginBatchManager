@@ -1,0 +1,6 @@
+dependencies {
+    compileOnly 'io.papermc.paper:paper-api:26.2.build.129-stable'
+}
+tasks.named('jar') {
+    archiveFileName = 'PluginBatchManager-Paper-0.1.0.jar'
+}

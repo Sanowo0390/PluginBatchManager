@@ -1,0 +1,13 @@
+name: PluginBatchManager
+version: '0.1.0'
+main: io.mintymc.pbm.paper.PaperPlugin
+api-version: '1.21'
+description: Batch plugin updates with original JAR filenames and .disabled archives
+commands:
+  pbm:
+    description: PluginBatchManager admin commands
+    usage: '/pbm <list|reload|check|download|apply|rollback>'
+    permission: pbm.admin
+permissions:
+  pbm.admin:
+    default: op
